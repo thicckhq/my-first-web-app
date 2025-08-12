@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Chứng từ</title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            width: 500px;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            font-family: "Times New Roman", Times, serif;
+            text-align: center; /* Căn giữa tiêu đề */
+        }
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .label {
+            width: 150px;
+            font-weight: bold;
+            margin-right: 10px;
+            white-space: nowrap;
+        }
+        .control-group {
+            display: flex;
+            align-items: center;
+        }
+        select, input[type="text"] {
+            width: 150px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: "Times New Roman", Times, serif;
+        }
+        .date-input {
+            width: 100px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Kiểm tra chứng từ</h2> <div class="form-row">
+            <label class="label">Loại hình Tờ khai</label>
+            <div class="control-group">
+                <select>
+                    <option value="nhap">Nhập</option>
+                    <option value="xuat">Xuất</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label class="label">Loại chứng từ</label>
+            <div class="control-group">
+                <select>
+                    <option value="hoadon">Hóa đơn</option>
+                    <option value="vandon">Vận đơn</option>
+                    <option value="hoadonkhac">Hóa đơn khác</option>
+                </select>
+                <div class="label" style="width: 80px; margin-left: 20px;">Trạng thái</div>
+                <select>
+                    <option value="thanhcong">Thành công</option>
+                    <option value="chuadinh">Chưa đính</option>
+                    <option value="loi">Lỗi phản hồi</option>
+                    <option value="nhapmoi">Nhập mới</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label class="label">Từ ngày</label>
+            <div class="control-group">
+                <input type="text" class="date-input" id="tuNgay" placeholder="dd/mm/yyyy">
+                <div class="label" style="width: 80px; margin-left: 20px;">Đến ngày</div>
+                <input type="text" class="date-input" id="denNgay" placeholder="dd/mm/yyyy">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tuNgayInput = document.getElementById('tuNgay');
+        const denNgayInput = document.getElementById('denNgay');
+
+        function getFormattedDate() {
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const year = today.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+        
+        [tuNgayInput, denNgayInput].forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                if (event.key === 'F3') {
+                    event.preventDefault();
+                    this.value = getFormattedDate();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
